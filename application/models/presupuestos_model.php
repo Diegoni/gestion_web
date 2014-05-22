@@ -86,7 +86,7 @@
 		INNER JOIN articulo 
 		ON(presupuesto_detalle.id_articulo=articulo.id_articulo) 
 		WHERE id_presupuesto='$id_presupuesto' 
-		ORDER BY id_articulo");
+		ORDER BY articulo.articulo");
 		
 		if($query->num_rows() > 0){
 			foreach ($query->result() as $fila){

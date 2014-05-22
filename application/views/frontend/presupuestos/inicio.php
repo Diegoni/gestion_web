@@ -33,7 +33,7 @@
 					<?php 
 					echo form_open('presupuestos/addPresupuesto');?>	
 					<li class="current">
-						<input type="hidden" name="id_usuario" value="<?phpecho $usuario['id_usuario']?>" >
+						<input type="hidden" name="id_usuario" value="<?php echo $usuario['id_usuario']?>" >
 						<button type="submit" class="btn btn-default nuevo_presupuesto" >
 							<i class="fa fa-file-o"></i> Nuevo
 						</button>	
@@ -119,8 +119,8 @@ foreach ($articulos as $articulo){?>
 															<input type="number" name="cantidad" value="1" min="<?php echo $articulo->stock_min?>" max="<?php echo $articulo->stock_max?>" class="cantidad">
 															<input type="hidden" name="id_articulo" value="<?php echo $articulo->id_articulo; ?>">
 															<input type="hidden" name="precio" value="<?php echo $articulo->precio; ?>">
-															<input type="hidden" name="id_categoria" value="<?php echo $articulo->id_categoria; ?>">
-															<input type="hidden" name="id_presupuesto" value="<?php echo $id_presupuesto; ?>">
+															<input type="hidden" name="id_categoria" value="<?php echo $articulo->id_categoria; ?>">															
+															<input type="hidden" name="id_presupuesto" value="<?php echo $id_presupuesto; ?>">	
 															<input type="hidden" name="id_usuario" value="<?php echo $usuario['id_usuario']; ?>">
 															<button class="cantidad-btn btn btn-success">
 																<i class="fa fa-plus"></i> Agregar
@@ -208,7 +208,7 @@ foreach ($articulos as $articulo){?>
 			<span class="brandDesc"><?php echo $detalle->descripcion?></span>
 		</div>
 		<div class="precio">
-			<?
+			<?php
 				$subtotal=$detalle->cantidad*$detalle->precio;
 				$total=$total+$subtotal;
 			?>

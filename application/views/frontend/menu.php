@@ -37,7 +37,7 @@
 			</form>
 			<ul class="nav navbar-nav navbar-right">
 				<?php 
-					if($usuario['id_usuario']){
+					if(isset($usuario['id_usuario'])){
 				?>
 				<li>
 					<a href="<?php echo base_url().'index.php/usuarios/interfaz/'.$usuario['id_usuario']?>">

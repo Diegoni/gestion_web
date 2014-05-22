@@ -56,10 +56,7 @@
 	}
 
 	function index(){
-		//if($id_presupuesto!=0){
-			$db['id_presupuesto']=$this->presupuestos_model->getPresupuesto(1);
-		//}
-		
+		$db['id_presupuesto']=$this->presupuestos_model->getPresupuesto(1);
 		$this->vistaCarga($db);
 	}
 	
