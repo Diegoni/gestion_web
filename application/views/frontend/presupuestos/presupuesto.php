@@ -103,7 +103,7 @@
 					
 					<td class="col-sm-2 col-md-2"></td>
 					<td class="col-sm-1 col-md-1"></td>
-          <td class="col-sm-1 col-md-1"></td>
+          			<td class="col-sm-1 col-md-1"></td>
 					
 					<td class="col-sm-1 col-md-1">
 						<a href="<?php echo base_url().'index.php/presupuestos/presupuesto/'.$articulo->id_articulo.'/3'; ?>" class="btn btn-danger delete" data-toggle="modal" >
@@ -123,7 +123,7 @@
 							No hay artículos marcados en el pedido.
 				</div>
 				<?php 	} ?>
-        <tr>
+        		<tr>
 					<td colspan="3"></td>
 					<td><h5>Subtotal</h5></td>
 					<td class="text-right"><h5><strong>$ <?php echo number_format($sub_total, 2 , ',' ,  '.' );?></strong></h5></td>
@@ -142,7 +142,7 @@
 				<tr>
 					<td colspan="2"></td>
 					<td>
-						<a href="<?php echo base_url().'index.php/presupuestos'?>" class="btn btn-success btn-icon" data-toggle="modal" >
+						<a href="<?php echo base_url().'index.php/presupuestos/getPresupuesto/'.$id_presupuesto?>" class="btn btn-success btn-icon" data-toggle="modal" >
 							<i class="fa fa-chevron-left"></i> 
 						</a>
 					</td>
@@ -158,7 +158,7 @@
 						</a>
 						<div class="sub-texto">Se deben valorar las notas</div>
 						<?php  }else{?>
-						<a href="<?php echo base_url().'index.php/presupuestos/transporte'.$id_presupuesto?>" class="btn btn-primary btn-icon confirm">
+						<a href="<?php echo base_url().'index.php/presupuestos/transporte/'.$id_presupuesto?>" class="btn btn-primary btn-icon confirm">
 							<i class="fa fa-check"></i>
 						</a>
 						<?php  } ?>		

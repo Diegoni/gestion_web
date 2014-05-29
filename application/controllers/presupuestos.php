@@ -47,8 +47,17 @@
 		$this->load->view('frontend/footer');		
 	}
 
-	function index(){
+	function index($id_presupuesto=0){
 		$db['id_presupuesto']=$this->presupuestos_model->getPresupuesto(1);
+		$this->vistaCarga($db);
+	}
+	
+	
+	function getPresupuesto($id_presupuesto=0){
+		if($id_presupuesto!=0){
+			$db['id_presupuesto']=$id_presupuesto;	
+		}	
+		
 		$this->vistaCarga($db);
 	}
 	
@@ -194,7 +203,7 @@
 	
 	public function transporte($id_articulo = 0){
 		$data = array('estado' => 2);
-		$db=$this->carga_usuario();	
+		$db=$this->usuarios_model->carga_usuario();	
 		
 		$db['direcciones'] = $this->usuarios_model->getDirecciones();
 		$db['condiciones_pago'] = $this->presupuestos_model->getCondicionespago();
