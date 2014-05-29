@@ -201,19 +201,46 @@
 *************************************************************************************
 ************************************************************************************/	 
 	
-	public function transporte($id_articulo = 0){
+	public function transporte($id_presupuesto = 30){
 		$data = array('estado' => 2);
-		$db=$this->usuarios_model->carga_usuario();	
 		
-		$db['direcciones'] = $this->usuarios_model->getDirecciones();
+		$db['usuario']=$this->usuarios_model->carga_usuario();
+		$db['direcciones'] = $this->usuarios_model->getDireccion($db['usuario']);
 		$db['condiciones_pago'] = $this->presupuestos_model->getCondicionespago();
 		$db['horas_entrega'] = $this->presupuestos_model->getHoras();
-		
+		$db['transportes'] = $this->usuarios_model->getTransportes();
+		$db['articulos'] = $this->presupuestos_model->getArticulos($id_presupuesto);
+		$db['id_presupuesto']=$id_presupuesto;
 			
 		$this->load->view('frontend/head');
 		$this->load->view('frontend/menu', $db);
 		$this->load->view('frontend/presupuestos/estado_presupuesto', $data);			
 		$this->load->view('frontend/presupuestos/transporte', $db);
+		$this->load->view('frontend/footer');
+  }
+
+
+/************************************************************************************
+*************************************************************************************
+								Pago
+*************************************************************************************
+************************************************************************************/	 
+	
+	public function pago($id_presupuesto = 30){
+		$data = array('estado' => 3);
+		
+		$db['usuario']=$this->usuarios_model->carga_usuario();
+		$db['direcciones'] = $this->usuarios_model->getDireccion($db['usuario']);
+		$db['condiciones_pago'] = $this->presupuestos_model->getCondicionespago();
+		$db['horas_entrega'] = $this->presupuestos_model->getHoras();
+		$db['transportes'] = $this->usuarios_model->getTransportes();
+		$db['articulos'] = $this->presupuestos_model->getArticulos($id_presupuesto);
+		$db['id_presupuesto']=$id_presupuesto;
+			
+		$this->load->view('frontend/head');
+		$this->load->view('frontend/menu', $db);
+		$this->load->view('frontend/presupuestos/estado_presupuesto', $data);			
+		$this->load->view('frontend/presupuestos/pago', $db);
 		$this->load->view('frontend/footer');
   }
 	

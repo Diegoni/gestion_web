@@ -230,7 +230,7 @@ class Inicio extends CI_Controller {
 			$this->_example_output($output);
 	}
 	
-		function horas_abm(){
+	function horas_abm(){
 			$crud = new grocery_CRUD();
 			
 			$crud->set_theme('datatables');
@@ -246,6 +246,27 @@ class Inicio extends CI_Controller {
 
 			$this->_example_output($output);
 	}
+	
+	function transportes_abm(){
+			$crud = new grocery_CRUD();
+			
+			$crud->set_theme('datatables');
+			$crud->set_table('transporte');
+			$crud->columns('id_transporte', 'transporte');
+			$crud->display_as('id_transporte','ID')
+				 ->display_as('id_estado','Estado')
+				 ->display_as('transporte','Transporte');			
+			$crud->set_subject('Transporte');
+			
+			$crud->set_relation('id_estado','estado','estado');
+			
+			$crud->required_fields('transporte');
+
+			$output = $crud->render();
+
+			$this->_example_output($output);
+	}
+	
 
 
 }

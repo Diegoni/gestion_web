@@ -57,6 +57,38 @@
 		}
 	}
 	
+	function getTransportes(){
+		$query = $this->db->query("SELECT * FROM transporte WHERE id_estado=1");
+		if($query->num_rows() > 0){
+			foreach ($query->result() as $fila){
+				$data[] = $fila;
+			}
+			return $data;
+		}else{
+			return FALSE;
+		}
+	}
+	
+	function getDireccion($id_usuario){
+		if(is_array($id_usuario)){
+			foreach ($id_usuario as $key => $value) {
+				if(is_numeric($value)){
+					$id=$value;
+				}
+			}
+			
+		}
+		$query = $this->db->query("SELECT * FROM direccion WHERE id_usuario='$id'");
+		if($query->num_rows() > 0){
+			foreach ($query->result() as $fila){
+				$data[] = $fila;
+			}
+			return $data;
+		}else{
+			return FALSE;
+		}
+	}
+	
 	function login($username, $password)
 	{
 		$this -> db -> select('id_usuario, usuario, password');
