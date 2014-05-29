@@ -68,7 +68,8 @@
 		}
 	}
 	
-	function getArticulos($id_presupuesto){
+	function getArticulos($id_presupuesto=0){
+		
 		$query = $this->db->query("SELECT 
 	    articulo.id_articulo as id,
 		articulo.articulo,

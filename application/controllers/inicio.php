@@ -11,18 +11,9 @@ class Inicio extends CI_Controller {
 			$this->load->helper('url');
 	}
 
-	function carga_usuario(){
-		if($this->session->userdata('logged_in')){
-			$session_data = $this->session->userdata('logged_in');
-			$db['id_usuario']=$session_data['id'];
-			$db['usuario']=$session_data['username'];
-			return $db;
-		}
-	}	
-
 	
 	public function index(){
-		$db=$this->carga_usuario();
+		$db['usuario']=$this->usuarios_model->carga_usuario();
 	
 		$db['fotos'] = $this->galerias_model->getFotos();
 		$db['noticias_secundarias'] = $this->noticias_model->getNoticiasSecundarias();
@@ -33,6 +24,7 @@ class Inicio extends CI_Controller {
 		$this->load->view('frontend/inicio/inicio', $db);
 		$this->load->view('frontend/footer');
 	}
+	
 	
 	public function error()
 	{

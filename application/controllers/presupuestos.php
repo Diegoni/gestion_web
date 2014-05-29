@@ -12,15 +12,7 @@
       $this->load->model('tipodirecciones_model');
 			$this->load->helper('url');
 	  }
-	  
-	function carga_usuario(){
-		if($this->session->userdata('logged_in')){
-			$session_data = $this->session->userdata('logged_in');
-			$db['id_usuario']=$session_data['id'];
-			$db['usuario']=$session_data['username'];
-			return $db;
-		}
-	}	
+
 
 /************************************************************************************
 *************************************************************************************
@@ -30,7 +22,7 @@
 	
 	function vistaCarga($db){
 		$data = array('estado' => 0);
-		$db['usuario']=$this->carga_usuario();
+		$db['usuario']=$this->usuarios_model->carga_usuario();
 		
 		$db['grupos'] = $this->grupos_model->getGrupos();
 		$db['notas'] = $this->presupuestos_model->getNotas();

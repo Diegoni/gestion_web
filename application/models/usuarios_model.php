@@ -80,7 +80,17 @@
     $this->session->unset_userdata('logged_in');
     session_destroy();
     redirect('inicio', 'refresh');
-  }
+  	}
+	
+	
+	function carga_usuario(){
+		if($this->session->userdata('logged_in')){
+			$session_data = $this->session->userdata('logged_in');
+			$db['id_usuario']=$session_data['id'];
+			$db['usuario']=$session_data['username'];
+			return $db;
+		}
+	}
 	
 	
 }
