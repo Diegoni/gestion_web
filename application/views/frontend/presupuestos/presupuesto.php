@@ -1,6 +1,7 @@
 <div class="row">
 	<div class="col-sm-12 col-md-10 col-md-offset-1">
-		<?php  echo form_open('presupuestos/updateDetalle'); ?>	
+		<?php  echo form_open('presupuestos/updateDetalle'); ?>
+		<input type="hidden" name="id_presupuesto" value="<?php echo $id_presupuesto;?>">	
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -77,6 +78,7 @@
 					<?php  echo form_open('presupuestos/deleteArticulo');?>
 						<input type="hidden" name="id_articulo" value="<?php  echo $articulo->id_articulo; ?>">
 						<input type="hidden" name="id_presupuesto" value="<?php  echo $id_presupuesto; ?>">
+						<input type="hidden" name="vista" value="vistaDetalle">
 						<button class="btn btn-danger delete" title="Sacar del pedido">
 							<i class="fa fa-trash-o"></i>
 						</button>

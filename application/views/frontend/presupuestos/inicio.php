@@ -114,18 +114,31 @@ foreach ($articulos as $articulo){?>
 												<tr>
 													<td colspan="2">
 														<center>
+															<?php if(isset($usuario['id_usuario'])){ ?>
 															<?php echo form_open('presupuestos/addArticulo'); ?>	
 															<label class="cantidad-label">Cant.</label>
 															<input type="number" name="cantidad" value="1" min="<?php echo $articulo->stock_min?>" max="<?php echo $articulo->stock_max?>" class="cantidad">
 															<input type="hidden" name="id_articulo" value="<?php echo $articulo->id_articulo; ?>">
 															<input type="hidden" name="precio" value="<?php echo $articulo->precio; ?>">
 															<input type="hidden" name="id_categoria" value="<?php echo $articulo->id_categoria; ?>">															
-															<input type="hidden" name="id_presupuesto" value="<?php echo $id_presupuesto; ?>">	
+															<?php if(is_array($id_presupuesto)){ ?>
+															<input type="hidden" name="id_presupuesto" value="">																
+															<?php }else{ 
+															echo $id_presupuesto;
+															?>
+															<input type="hidden" name="id_presupuesto" value="<?php echo $id_presupuesto; ?>">																															
+															<?php }	?>
+																
 															<input type="hidden" name="id_usuario" value="<?php echo $usuario['id_usuario']; ?>">
 															<button class="cantidad-btn btn btn-success">
 																<i class="fa fa-plus"></i> Agregar
 															</button>
-															<?php echo form_close(); ?>		
+															<?php echo form_close(); ?>	
+															<?php }else{?>
+															<a  href="" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">
+																<i class="fa fa-sign-in"></i> Login
+															</a>
+															<?php }?>	
 														</center>
 													</td>
 												</tr>
@@ -215,9 +228,13 @@ foreach ($articulos as $articulo){?>
 			$<?php echo $subtotal;?>
 		</div>
 		<div class="eliminar">
-		<a class="btn btn-danger delete" title="sacar del pedido"   href="<?php echo base_url().'index.php/presupuestos/funcion/'.$detalle->id_categoria.'/'.$detalle->id_articulo.'/3';?>">
+		<?php echo form_open('presupuestos/deleteArticulo'); ?>
+		<input type="hidden" name="id_presupuesto" value="<?php echo $id_presupuesto; ?>">
+		<input type="hidden" name="vista" value="vistaCarga">
+		<button class="btn btn-danger delete" title="sacar del pedido" value="<?php echo $detalle->id_articulo;?>" name="id_articulo">
 			<i class="fa fa-trash-o"></i>
-		</a>	
+		</button>	
+		<?php echo form_close() ?>
 		<a class="btn btn-primary"  title="agregar nota" data-toggle="modal" data-target=".modal-nota">
 			<i class="fa fa-pencil"></i>
 		</a>	

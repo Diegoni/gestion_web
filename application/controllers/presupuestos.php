@@ -54,9 +54,8 @@
 	
 	function addPresupuesto(){
 		//$this->presupuestos_model->truncatePresupuesto();
-		$presupuesto=array(
-											'id_usuario'=>$this->input->post('id_usuario'),
-											'fecha_creacion'=>date("Y/m/d"));
+		$presupuesto=array('id_usuario'=>$this->input->post('id_usuario'),
+							'fecha_creacion'=>date("Y/m/d"));
 		if(isset($presupuesto) || $presupuesto!=0){
 			$db['id_presupuesto']=$this->presupuestos_model->addPresupuesto($presupuesto);
 		}
@@ -67,10 +66,7 @@
 	
 	public function funcion($id_categoria = 0, $id_articulo = 0, $id_funcion =0){
 		if($id_articulo!=0){
-			if($id_funcion==3){
-				$db['id']=$this->presupuestos_model->deleteArticulo($id_articulo);
-				$db['funcion'] = $this->presupuestos_model->getFuncion(3);
-			}else if($id_funcion==4){
+			if($id_funcion==4){
 				$db['id'] = 1;
 				$this->presupuestos_model->truncatePresupuesto();
 				$db['funcion'] = $this->presupuestos_model->getFuncion(4);
@@ -82,15 +78,15 @@
 		
 		$this->vistaCarga($db);
 	}
-		
+	
 	function addArticulo(){
 		if($this->input->post('id_presupuesto')){
+			$id_presupuesto=$this->input->post('id_presupuesto');
+		}else{
 			$presupuesto=array(
 											'id_usuario'=>$this->input->post('id_usuario'),
 											'fecha_creacion'=>date("Y/m/d"));
 			$id_presupuesto=$this->presupuestos_model->addPresupuesto($presupuesto);
-		}else{
-			$id_presupuesto=$this->input->post('id_presupuesto');
 		}
 		$articulo=array('id_articulo' => $this->input->post('id_articulo'),
 										'cantidad' => $this->input->post('cantidad'),
@@ -103,6 +99,22 @@
 		$db['id_presupuesto']=$id_presupuesto;
 	
 		$this->vistaCarga($db);
+	}
+	
+	public function deleteArticulo(){
+		$db['id_articulo']=$this->input->post('id_articulo');
+		$db['id_presupuesto']=$this->input->post('id_presupuesto');
+		$vista=$this->input->post('vista');
+		$db['funcion'] = $this->presupuestos_model->getFuncion(3);
+
+		$db['id']=$this->presupuestos_model->deleteArticulo($db['id_articulo'], $db['id_presupuesto']);
+		
+		if($vista=='vistaCarga'){
+			$this->vistaCarga($db);	
+		}else if($vista=='vistaDetalle'){
+			$this->vistaDetalle($db);
+		}
+		
 	}
 		
 	function addNota(){
@@ -133,13 +145,13 @@
 		
 	public function vistaDetalle($db){
 		$data = array('estado' => 1);
-		$db['usuario']=$this->carga_usuario();
+		$db['usuario']=$this->usuarios_model->carga_usuario();
 		
 		$db['notas'] = $this->presupuestos_model->getNotas();
 		if($db['notas']){
 			$db['p_estado'] = 'Pendiente de resolver';
 		}
-	
+
 		$db['articulos'] = $this->presupuestos_model->getArticulos($db['id_presupuesto']);
 			
 		$this->load->view('frontend/head');
@@ -161,24 +173,13 @@
 	}
 	
 
-	public function deleteArticulo(){
-		$db['id_articulo']=$this->input->post('id_articulo');
-		$db['id_presupuesto']=$this->input->post('id_presupuesto');
-		$db['funcion'] = $this->presupuestos_model->getFuncion(3);
-		
-		if($db['id_articulo']!=0){
-				$db['id']=$this->presupuestos_model->deleteArticulo($db['id_articulo']);
-		}
-		
-		$this->vistaDetalle($db);
-	}
-
 	public function updateDetalle(){
-		$db['articulos'] = $this->presupuestos_model->getArticulos();
-		foreach($db['articulos'] as $articulo){
+		$db['id_presupuesto']=$this->input->post('id_presupuesto');
+		$articulos = $this->presupuestos_model->getArticulos($this->input->post('id_presupuesto'));
+		foreach($articulos as $articulo){
 			$detalle=array('id_articulo'=>$this->input->post('id'.$articulo->id_articulo),
-										'cantidad'=>$this->input->post('quant'.$articulo->id_articulo),
-										'precio'=>$this->input->post('precio'.$articulo->id_articulo));
+							'cantidad'=>$this->input->post('quant'.$articulo->id_articulo),
+							'precio'=>$this->input->post('precio'.$articulo->id_articulo));
 			$this->presupuestos_model->updateDetalle($detalle);
 		}
 
