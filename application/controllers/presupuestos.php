@@ -245,6 +245,25 @@
   }
 	
 	
+/************************************************************************************
+*************************************************************************************
+								Abrir presupuesto
+*************************************************************************************
+************************************************************************************/	 
+	
+	public function abrirPresupuesto($id_presupuesto = 30){
+		
+		
+		$db['usuario']=$this->usuarios_model->carga_usuario();
+		$db['presupuestos'] = $this->presupuestos_model->getPresupuestos($db['usuario']);
+			
+		$this->load->view('frontend/head');
+		$this->load->view('frontend/menu', $db);	
+		$this->load->view('frontend/presupuestos/abrirPedido', $db);
+		$this->load->view('frontend/footer');
+  }	
+	
+	
   
 
 } ?>

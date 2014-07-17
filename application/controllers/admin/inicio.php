@@ -62,7 +62,7 @@ class Inicio extends CI_Controller {
 			$crud->set_table('grupo');
 			$crud->columns('id_grupo','grupo','id_estado');
 			$crud->display_as('id_grupo','Grupo')					 
-					 ->display_as('id_estado','Estado');
+				->display_as('id_estado','Estado');
 			$crud->set_relation('id_estado','estado','estado');
 			$crud->set_subject('grupo');
 			

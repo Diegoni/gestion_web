@@ -17,12 +17,13 @@
 	  
 				<?php 
 				$primero=0;
-				foreach($fotos as $foto){?>
-        <div class="item <?php if($primero==0){
+				foreach($fotos as $foto){
+				?>
+        	<div class="item <?php if($primero==0){
 														echo "active";
 														$primero=1;
 														}?>">
-          <img  alt="slide" src="<?php echo base_url().'assets/uploads/files/'.$foto->imagen;?>">
+          	<img  alt="slide" src="<?php echo base_url().'assets/uploads/files/'.$foto->imagen;?>">
 					<div class="carousel-caption">
 					<p><?php echo $foto->titulo;?></p>
 					</div>

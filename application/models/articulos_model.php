@@ -1,4 +1,5 @@
-<?php class Articulos_model extends CI_Model {
+<?php 
+class Articulos_model extends CI_Model {
 	
 	function getArticulos($id_categoria=NULL){
 		if(isset($id_categoria)){	
